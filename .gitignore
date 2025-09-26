@@ -1,0 +1,40 @@
+# Freqtrade user_data .gitignore
+
+# Databases
+*.db
+*.db-shm
+*.db-wal
+
+# Lock files
+*.lock
+
+# Log files
+/logs/
+!/logs/.gitkeep
+
+# Backtest results
+/backtest_results/
+!/backtest_results/.gitkeep
+!/backtest_results/.last_result.json
+
+# Plotting directory
+/plot/
+
+# Data files
+/data/
+!/data/.gitkeep
+
+# Hyperopt results history (we only want to keep the final JSON output)
+/hyperopt_results/*.fthypt
+/hyperopt_results/hyperopt_tickerdata.pkl
+
+# FreqAI trained models
+/freqaimodels/*_prod/
+/models/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# HTML reports from plotting or backtesting
+*.html

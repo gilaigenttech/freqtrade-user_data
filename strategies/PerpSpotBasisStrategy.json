@@ -1,0 +1,28 @@
+{
+  "strategy_name": "PerpSpotBasisStrategy",
+  "params": {
+    "trailing": {
+      "trailing_stop": false,
+      "trailing_stop_positive": null,
+      "trailing_stop_positive_offset": 0.0,
+      "trailing_only_offset_is_reached": false
+    },
+    "max_open_trades": {
+      "max_open_trades": 1
+    },
+    "buy": {},
+    "sell": {},
+    "protection": {},
+    "roi": {
+      "0": 0.217,
+      "31": 0.058,
+      "65": 0.04,
+      "142": 0
+    },
+    "stoploss": {
+      "stoploss": -0.274
+    }
+  },
+  "ft_stratparam_v": 1,
+  "export_time": "2025-09-25 08:32:37.976987+00:00"
+}
