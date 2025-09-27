@@ -1,0 +1,32 @@
+#### V9
+
+#download data:
+cd /home/gil/freqtrade && ./.env/bin/freqtrade download-data -c user_data/config_v9_optimized.json --timerange 20240101-20241201 --timeframes 1h
+
+#backtesting for 9 days
+cd /home/gil/freqtrade && ./.env/bin/freqtrade backtesting -c user_data/config_v9_optimized.json --strategy AlexStrategyFinalV9 --timerange 20240801-20240810 --cache=day
+
+#additional recommendations:
+	# Extended backtest with more data
+	cd /home/gil/freqtrade
+	./.env/bin/freqtrade backtesting -c user_data/config_v9_optimized.json --strategy AlexStrategyFinalV9 --timerange 20240601-20241101 --breakdown day week month
+
+	# With position stacking for more opportunities
+	./.env/bin/freqtrade backtesting -c user_data/config_v9_optimized.json --strategy AlexStrategyFinalV9 --timerange 20240601-20241101 --enable-position-stacking
+
+
+# Optimize the strategy parameters
+./.env/bin/freqtrade hyperopt -c user_data/config_v9_optimized.json --strategy AlexStrategyFinalV9 --hyperopt-loss SharpeHyperOptLoss --spaces buy sell --epochs 50 --timerange 20240601-20240901
+
+# Start with dry-run first
+./.env/bin/freqtrade trade -c user_data/config_v9_optimized.json --strategy AlexStrategyFinalV9
+
+
+
+
+#### V8
+Download the necessary historical data for all of 2024, including the 30-day training period.
+cd /home/gil/freqtrade && ./.env/bin/freqtrade download-data --config user_data/config_test.json --timeframes 1h 2h 4h --timerange 20231202-20241231 --erase
+
+Run the backtest for the entire year of 2024.
+cd /home/gil/freqtrade && ./.env/bin/freqtrade backtesting --config user_data/config_test.json --strategy AlexStrategyFinalV8 --timerange 20240101-20241231 --enable-position-stacking --cache=day --verbose

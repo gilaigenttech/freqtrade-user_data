@@ -1,0 +1,191 @@
+{
+    "trading_mode": "futures",
+    "margin_mode": "isolated",
+    "max_open_trades": 5,
+    "stake_currency": "USDT",
+    "stake_amount": 10,
+    "tradable_balance_ratio": 0.9,
+    "dry_run_wallet": 1000,
+    "fiat_display_currency": "USD",
+    "strategy": "AlexStrategyFinalV9",
+    "freqaimodel": "PyTorchLSTMRegressor",
+    "dataformat_ohlcv": "json",
+    "dataformat_trades": "jsongz",
+    "timeframe": "1h",
+    "stoploss_on_exchange": false,
+    "dry_run": true,
+    "cancel_open_orders_on_exit": true,
+    "unfilledtimeout": {
+        "unit": "minutes",
+        "entry": 10,
+        "exit": 30
+    },
+    "order_types": {
+        "entry": "limit",
+        "exit": "limit",
+        "emergency_exit": "market",
+        "force_entry": "market",
+        "force_exit": "market",
+        "stoploss": "market",
+        "stoploss_on_exchange": false,
+        "stoploss_on_exchange_interval": 60
+    },
+    "entry_pricing": {
+        "price_side": "other",
+        "ask_last_balance": 0,
+        "use_order_book": true,
+        "order_book_top": 1,
+        "check_depth_of_market": {
+            "enabled": false,
+            "bids_to_ask_delta": 1
+        }
+    },
+    "exit_pricing": {
+        "price_side": "other",
+        "use_order_book": true,
+        "order_book_top": 1
+    },
+    "exchange": {
+        "name": "bybit",
+        "sandbox": false,
+        "key": "",
+        "secret": "",
+        "ccxt_config": {
+            "enableRateLimit": true
+        },
+        "ccxt_async_config": {
+            "enableRateLimit": true,
+            "rateLimit": 200
+        },
+        "pair_whitelist": [
+            "ETH/USDT:USDT",
+            "BTC/USDT:USDT",
+            "SOL/USDT:USDT",
+            "PEOPLE/USDT:USDT",
+            "ETHFI/USDT:USDT",
+            "XRP/USDT:USDT",
+            "BNB/USDT:USDT",
+            "ARB/USDT:USDT",
+            "OP/USDT:USDT",
+            "NEAR/USDT:USDT",
+            "WLD/USDT:USDT",
+            "AVAX/USDT:USDT",
+            "LINK/USDT:USDT",
+            "ADA/USDT:USDT"
+        ],
+        "pair_blacklist": [
+            ".*UP/USDT:USDT",
+            ".*DOWN/USDT:USDT",
+            ".*BEAR/USDT:USDT",
+            ".*BULL/USDT:USDT"
+        ]
+    },
+    "pairlists": [
+        {
+            "method": "StaticPairList"
+        }
+    ],
+    "edge": {
+        "enabled": false,
+        "process_throttle_secs": 3600,
+        "calculate_since_number_of_days": 7,
+        "allowed_risk": 0.01,
+        "stoploss_range_min": -0.01,
+        "stoploss_range_max": -0.1,
+        "stoploss_range_step": -0.01,
+        "minimum_winrate": 0.6,
+        "minimum_expectancy": 0.2,
+        "min_trade_number": 10,
+        "max_trade_duration_minute": 1440,
+        "remove_pumps": false
+    },
+    "telegram": {
+        "enabled": false,
+        "token": "",
+        "chat_id": ""
+    },
+    "freqai": {
+        "enabled": true,
+        "identifier": "AlexV9-torch-lstm",
+        "train_period_days": 30,
+        "fit_live_predictions_candles": 24,
+        "backtest_period_days": 7,
+        "expiration_hours": 1,
+        "live_retrain_hours": 0,
+        "purge_old_models": 2,
+        "save_backtest_models": true,
+        "write_metrics_to_disk": true,
+        "activate_tensorboard": false,
+        "feature_parameters": {
+            "include_corr_pairlist": [
+                "BTC/USDT:USDT",
+                "ETH/USDT:USDT"
+            ],
+            "include_timeframes": [
+                "1h"
+            ],
+            "label_period_candles": 24,
+            "include_shifted_candles": 2,
+            "DI_threshold": 10,
+            "weight_factor": 0.5,
+            "indicator_periods_candles": [
+                10,
+                20,
+                50
+            ],
+            "noise_standard_deviation": 0.01,
+            "buffer_train_data_candles": 20,
+            "principal_component_analysis": false,
+            "use_SVM_to_remove_outliers": true,
+            "svm_params": {
+                "shuffle": true,
+                "nu": 0.1
+            },
+            "use_DBSCAN_to_remove_outliers": false
+        },
+        "data_split_parameters": {
+            "test_size": 0.2,
+            "random_state": 42,
+            "shuffle": false
+        },
+        "model_training_parameters": {
+            "learning_rate": 3e-3,
+            "trainer_kwargs": {
+                "n_steps": null,
+                "batch_size": 32,
+                "n_epochs": 25
+            },
+            "model_kwargs": {
+                "num_lstm_layers": 3,
+                "hidden_dim": 128,
+                "dropout_percent": 0.4,
+                "window_size": 10
+            }
+        }
+    },
+    "api_server": {
+        "enabled": false,
+        "listen_ip_address": "127.0.0.1",
+        "listen_port": 8080,
+        "verbosity": "error",
+        "enable_openapi": false,
+        "jwt_secret_key": "somethingrandom",
+        "ws_token": "",
+        "CORS_origins": [],
+        "username": "",
+        "password": ""
+    },
+    "bot_name": "AlexV9_FreqAI",
+    "initial_state": "running",
+    "force_entry_enable": false,
+    "internals": {
+        "process_throttle_secs": 5
+    },
+    "margin": {
+        "enabled": true,
+        "leverage": 5.0
+    },
+    "logging": {
+        "loglevel": "INFO"
+    }
+}
