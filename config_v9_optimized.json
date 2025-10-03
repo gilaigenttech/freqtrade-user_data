@@ -61,17 +61,7 @@
             "ETH/USDT:USDT",
             "BTC/USDT:USDT",
             "SOL/USDT:USDT",
-            "PEOPLE/USDT:USDT",
-            "ETHFI/USDT:USDT",
-            "XRP/USDT:USDT",
-            "BNB/USDT:USDT",
-            "ARB/USDT:USDT",
-            "OP/USDT:USDT",
-            "NEAR/USDT:USDT",
-            "WLD/USDT:USDT",
-            "AVAX/USDT:USDT",
-            "LINK/USDT:USDT",
-            "ADA/USDT:USDT"
+            "BNB/USDT:USDT"
         ],
         "pair_blacklist": [
             ".*UP/USDT:USDT",
@@ -164,16 +154,16 @@
         }
     },
     "api_server": {
-        "enabled": false,
+        "enabled": true,
         "listen_ip_address": "127.0.0.1",
-        "listen_port": 8080,
+        "listen_port": 8081,
         "verbosity": "error",
         "enable_openapi": false,
         "jwt_secret_key": "somethingrandom",
         "ws_token": "",
         "CORS_origins": [],
-        "username": "",
-        "password": ""
+        "username": "gil",
+        "password": "gil"
     },
     "bot_name": "AlexV9_FreqAI",
     "initial_state": "running",

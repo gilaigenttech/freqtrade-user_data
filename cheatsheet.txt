@@ -16,7 +16,7 @@ cd /home/gil/freqtrade && ./.env/bin/freqtrade backtesting -c user_data/config_v
 
 
 # Optimize the strategy parameters
-./.env/bin/freqtrade hyperopt -c user_data/config_v9_optimized.json --strategy AlexStrategyFinalV9 --hyperopt-loss SharpeHyperOptLoss --spaces buy sell --epochs 50 --timerange 20240601-20240901
+./.env/bin/freqtrade hyperopt -c user_data/config_v9_optimized.json --strategy AlexStrategyFinalV9 --hyperopt-loss SharpeHyperOptLoss --spaces buy sell --epochs 50 --timerange 20240801-20240810
 
 # Start with dry-run first
 ./.env/bin/freqtrade trade -c user_data/config_v9_optimized.json --strategy AlexStrategyFinalV9

@@ -163,7 +163,7 @@ class PyTorchModelTrainer(PyTorchTrainerInterface):
         )
 
     def load(self, path: Path):
-        checkpoint = torch.load(path)
+        checkpoint = torch.load(path, weights_only=False)
         return self.load_from_checkpoint(checkpoint)
 
     def load_from_checkpoint(self, checkpoint: Dict):

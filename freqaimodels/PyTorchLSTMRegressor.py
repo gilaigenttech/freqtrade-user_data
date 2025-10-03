@@ -1,15 +1,24 @@
 from typing import Dict, Any
 import torch
+from torch.nn import ModuleList, LSTM, BatchNorm1d, Dropout, Linear, AlphaDropout, ReLU, MSELoss
+from torch.optim import AdamW
+from collections import defaultdict
 from freqtrade.freqai.base_models.BasePyTorchRegressor import BasePyTorchRegressor
 from freqtrade.freqai.data_kitchen import FreqaiDataKitchen
 from freqtrade.freqai.torch.PyTorchDataConvertor import PyTorchDataConvertor, DefaultPyTorchDataConvertor
 from freqtrade.freqai.torch.PyTorchLSTMModel import PyTorchLSTMModel
+from freqtrade.freqai.tensorboard.base_tensorboard import BaseTensorboardLogger
 
 # Import our custom trainer using absolute import
 import sys
 import os
 sys.path.append(os.path.dirname(__file__))
 from PyTorchModelTrainer import PyTorchModelTrainer
+
+import torch.serialization
+torch.serialization.add_safe_globals([
+    PyTorchModelTrainer, PyTorchLSTMModel, ModuleList, LSTM, BatchNorm1d, Dropout, Linear, AlphaDropout, ReLU, AdamW, defaultdict, dict, MSELoss, DefaultPyTorchDataConvertor, BaseTensorboardLogger
+])
 
 
 class PyTorchLSTMRegressor(BasePyTorchRegressor):

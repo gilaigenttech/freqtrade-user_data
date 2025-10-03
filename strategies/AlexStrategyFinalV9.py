@@ -108,6 +108,35 @@ class AlexStrategyFinalV9(IStrategy):
     w7 = RealParameter(0, 1, default=0.05, space='buy')  # ATR (normalized_atr)
     w8 = RealParameter(0, 1, default=0.10, space='buy')  # Stochastic Oscillator (normalized_stoch)
 
+    plot_config = {
+        'main_plot': {
+            'ma_100': {'color': 'blue'},
+            'bb_upperband': {'color': 'orange'},
+            'bb_middleband': {'color': 'yellow'},
+            'bb_lowerband': {'color': 'orange'},
+        },
+        'subplots': {
+            "Target": {
+                'T': {'color': 'blue'},
+                '&-target': {'color': 'green'},
+            },
+            "Scores": {
+                'S': {'color': 'purple'},
+            },
+            "Filters": {
+                'R': {'color': 'red'},
+                'R2': {'color': 'brown'},
+                'V': {'color': 'green'},
+                'V2': {'color': 'black'},
+            },
+            "Normalized Indicators": {
+                'normalized_ma': {'color': 'blue'},
+                'normalized_macd': {'color': 'red'},
+                'normalized_rsi': {'color': 'green'},
+            }
+        }
+    }
+
     def feature_engineering_expand_all(self, dataframe: DataFrame, period: int,
                                        metadata: Dict, **kwargs):
         """

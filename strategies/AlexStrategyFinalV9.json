@@ -1,0 +1,41 @@
+{
+  "strategy_name": "AlexStrategyFinalV9",
+  "params": {
+    "roi": {
+      "0": 0.239,
+      "79": 0.058,
+      "231": 0.029,
+      "543": 0
+    },
+    "stoploss": {
+      "stoploss": -0.305
+    },
+    "trailing": {
+      "trailing_stop": false,
+      "trailing_stop_positive": null,
+      "trailing_stop_positive_offset": 0.0,
+      "trailing_only_offset_is_reached": false
+    },
+    "max_open_trades": {
+      "max_open_trades": 5
+    },
+    "buy": {
+      "threshold_buy": -0.9723801452245,
+      "w0": 0.6190098161324,
+      "w1": 0.7491393785727,
+      "w2": 0.2531500035173,
+      "w3": 0.2061422112334,
+      "w4": 0.6262388237281,
+      "w5": 0.3690772049957,
+      "w6": 0.8504872392743,
+      "w7": 0.0421155944581,
+      "w8": 0.0129587871146
+    },
+    "sell": {
+      "threshold_sell": 0.6113085585252
+    },
+    "protection": {}
+  },
+  "ft_stratparam_v": 1,
+  "export_time": "2025-10-03 07:13:43.296390+00:00"
+}
