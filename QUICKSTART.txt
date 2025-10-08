@@ -1,0 +1,218 @@
+╔══════════════════════════════════════════════════════════════════╗
+║          🚀 FREQTRADE LOCAL DRY RUN - QUICK START 🚀             ║
+╚══════════════════════════════════════════════════════════════════╝
+
+📋 PREREQUISITES CHECKLIST:
+  [ ] Binance Testnet API Keys obtained
+  [ ] API keys added to config_dryrun_futures.json
+  [ ] Data downloaded
+  [ ] FreqUI credentials saved
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🔑 STEP 1: GET BINANCE TESTNET API KEYS
+
+  1. Visit: https://testnet.binancefuture.com/
+  2. Login with GitHub or Google
+  3. Click "API Key" (top right)
+  4. Generate new key
+  5. Save API Key and Secret
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+⚙️  STEP 2: CONFIGURE API KEYS
+
+  cd /home/gil/freqtrade/user_data
+  nano config_dryrun_futures.json
+
+  # Update lines 38-39:
+  "key": "YOUR_TESTNET_API_KEY",
+  "secret": "YOUR_TESTNET_SECRET_KEY"
+
+  # Save: Ctrl+O, Enter
+  # Exit: Ctrl+X
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📥 STEP 3: DOWNLOAD DATA
+
+  cd /home/gil/freqtrade
+
+  ./venv/bin/freqtrade download-data \
+    --config user_data/config_dryrun_futures.json \
+    --timerange 20251001- \
+    --timeframe 5m 1h 4h 1d
+
+  ⏱️  Takes ~5 minutes
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🚀 STEP 4: START DRY RUN
+
+  cd /home/gil/freqtrade/user_data
+  ./start_dryrun.sh
+
+  ✅ Bot starts in background (screen session)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🎨 STEP 5: OPEN FREQUI (WEB INTERFACE)
+
+  Open browser: http://localhost:8081
+
+  Login:
+    Username: admin
+    Password: IPXJ_w_f1KdDrgkUbufT_w
+
+  💡 Bookmark this page!
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📊 MONITORING COMMANDS
+
+  # Quick status dashboard
+  cd /home/gil/freqtrade/user_data
+  ./check_status.sh
+
+  # View live logs
+  tail -f logs/freqtrade.log
+
+  # Reattach to bot screen
+  screen -r freqtrade
+
+  # Show all trades
+  cd /home/gil/freqtrade/user_data
+  ../venv/bin/freqtrade show-trades \
+    --config config_dryrun_futures.json
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🛑 STOP/RESTART COMMANDS
+
+  # Stop bot
+  pkill -f 'freqtrade trade'
+  # OR
+  screen -S freqtrade -X quit
+
+  # Restart bot
+  cd /home/gil/freqtrade/user_data
+  ./start_dryrun.sh
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📈 WHAT TO EXPECT
+
+  First Hour:
+    ⏳ Bot analyzing pairs
+    ⏳ Populating indicators
+    ⏳ "Waiting for signal" in logs
+
+  First 24 Hours:
+    ✅ First trades appear (tag 603)
+    ✅ Short positions opening
+    ✅ Grinding/DCA behavior
+
+  After 1 Week:
+    📊 10-30+ trades
+    💰 Profit/loss visible
+    📈 Performance trends showing
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+⚠️  IMPORTANT NOTES
+
+  ✓ This is TESTNET - No real money!
+  ✓ Dry run wallet: 1000 USDT (simulated)
+  ✓ Run for 2 weeks minimum before live
+  ✓ Monitor daily via FreqUI
+  ✓ Check for errors in logs
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🆘 TROUBLESHOOTING
+
+  Problem: No trades appearing
+  Solution: Wait 24-48 hours, check logs for errors
+
+  Problem: FreqUI won't load
+  Solution: Check bot is running: ./check_status.sh
+
+  Problem: API errors
+  Solution: Verify testnet API keys are correct
+
+  Problem: "No data" errors
+  Solution: Re-run download-data command
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📚 HELPFUL GUIDES
+
+  Full deployment guide:
+    cat DEPLOYMENT_GUIDE.md
+
+  FreqUI setup guide:
+    cat FREQUI_GUIDE.md
+
+  Step-by-step checklist:
+    cat CHECKLIST.md
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🎯 TODAY'S GOALS
+
+  [ ] Get Binance Testnet API keys
+  [ ] Add keys to config
+  [ ] Download data
+  [ ] Start bot
+  [ ] Login to FreqUI
+  [ ] See bot running in logs
+  [ ] Setup Telegram (optional but recommended!)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📱 OPTIONAL: SETUP TELEGRAM (Highly Recommended!)
+
+  Why? Get trade notifications on your phone!
+
+  Quick Setup (5 minutes):
+    1. Message @BotFather on Telegram
+    2. Send: /newbot
+    3. Save the token
+    4. Message @userinfobot to get your chat_id
+    5. Update config with token and chat_id
+    6. Restart bot
+
+  Full guide:
+    cat TELEGRAM_SETUP.md
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📱 FREQUI WEB INTERFACE FEATURES
+
+  Dashboard:
+    - Real-time balance & profit
+    - Win rate statistics
+    - Daily profit charts
+
+  Trading Tab:
+    - All open positions
+    - Force exit buttons
+    - Entry/exit prices
+    - Current profit %
+
+  Logs Tab:
+    - Live bot logs
+    - Filter by level (INFO/WARNING/ERROR)
+
+  Charts:
+    - Candlestick charts
+    - Strategy indicators
+    - Entry/exit points
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Need help? Check the guides or visit:
+  https://www.freqtrade.io/en/stable/
+  https://discord.gg/freqtrade
+
+Good luck! 🚀
